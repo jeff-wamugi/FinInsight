@@ -12,7 +12,7 @@ Welcome to the **Streamlit Application Project**! This project is a Python-based
 The repository contains the following files and directories:
 
 ```
-├── your_app.py          # Main Streamlit application file
+├── app.py          # Main Streamlit application file
 ├── requirements.txt     # List of Python dependencies
 ├── .env                 # Environment variables (if applicable)
 └── README.md            # Project documentation
