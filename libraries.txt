@@ -1,0 +1,16 @@
+Streamlit: For building the web interface.
+PyPDF2: For handling PDF files.
+pandas: For handling CSV, TSV, and XLSX files.
+openpyxl: For reading and writing Excel files.
+langchain: For language model integration.
+langchain_google_genai: For Google Generative AI integration.
+langchain-community: For community-contributed integrations.
+python-dotenv: For managing environment variables.
+google-generativeai: For Google Generative AI.
+chromadb: For vector database.
+faiss-cpu: For efficient similarity search.
+numpy: For numerical operations.
+scikit-learn: For machine learning algorithms.
+nltk: For natural language processing.
+pdfplumber: For extracting text from PDFs.
+xlrd: For reading older Excel files.

@@ -1,0 +1,13 @@
+streamlit
+PyPDF2
+langchain
+langchain_google_genai
+langchain-community
+python-dotenv
+google-generativeai
+chromadb
+faiss-cpu
+openpyxl
+nltk
+pdfplumber
+xlrd
