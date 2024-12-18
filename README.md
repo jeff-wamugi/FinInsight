@@ -84,7 +84,7 @@ Refer to the documentation of the cloud provider for deployment instructions.
   Use a `.env` file to store sensitive information like API keys.
 
 ## Contributing
-We welcome contributions to this project! To contribute:
+I welcome contributions to this project! To contribute:
 1. Fork the repository.
 2. Create a feature branch.
 3. Submit a pull request with detailed information about your changes.
