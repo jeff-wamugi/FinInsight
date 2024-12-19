@@ -9,6 +9,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmb
 from dotenv import load_dotenv
 import os
 import google.generativeai as genai
+import pdfplumber
 
 # Load environment variables
 load_dotenv()
@@ -18,9 +19,9 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def get_pdf_text(pdf_docs):
     text = ""
     for pdf in pdf_docs:
-        pdf_reader = PdfReader(pdf)
-        for page in pdf_reader.pages:
-            text += page.extract_text() or ""  # Handle None cases
+        with pdfplumber.open(pdf) as pdf_reader:
+            for page in pdf_reader.pages:
+                text += page.extract_text() or ""
     return text
 
 # Function to split text into manageable chunks
