@@ -28,8 +28,8 @@ def get_pdf_text(pdf_docs):
 # Function to split text into manageable chunks
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=2000, 
-        chunk_overlap=200, 
+        chunk_size=5000, 
+        chunk_overlap=500, 
         separators=["\n\n", "\n", " ", ""]
     )
     return text_splitter.split_text(text)
