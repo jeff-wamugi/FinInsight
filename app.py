@@ -16,24 +16,26 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Function to extract text from PDF files
+@st.cache_data
 def get_pdf_text(pdf_docs):
     text = ""
     for pdf in pdf_docs:
         with pdfplumber.open(pdf) as pdf_reader:
-            for page in pdf_reader.pages:
+            for page in pdf_reader.pages[:10]:
                 text += page.extract_text() or ""
     return text
 
 # Function to split text into manageable chunks
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=5000, 
-        chunk_overlap=500, 
+        chunk_size=2000, 
+        chunk_overlap=200, 
         separators=["\n\n", "\n", " ", ""]
     )
     return text_splitter.split_text(text)
 
 # Function to extract data from Excel/CSV/TSV files
+@st.cache_data
 def get_data_from_file(file):
     try:
         if file.name.endswith(('.csv', '.tsv')):
@@ -155,9 +157,6 @@ def main():
                 else:
                     df = get_data_from_file(file)
                     if df is not None:
-                        insights = generate_dataframe_insights(df)
-                        #st.subheader(f"Insights for {file.name}:")
-                        #st.markdown(insights)
                         all_text += df.to_string() + "\n"  # Add DataFrame as text for FAISS processing
 
             # Process text into chunks and create vector store
