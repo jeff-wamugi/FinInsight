@@ -16,13 +16,13 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Function to extract text from PDF files
-@st.cache_data
 def get_pdf_text(pdf_docs):
     text = ""
     for pdf in pdf_docs:
-        with pdfplumber.open(pdf) as pdf_reader:
-            for page in pdf_reader.pages[:10]:
-                text += page.extract_text() or ""
+        pdf_reader = PdfReader(pdf)
+        for page in pdf_reader.pages:
+            text += page.extract_text() or ""  # Handle None cases
+
     return text
 
 # Function to split text into manageable chunks
@@ -35,7 +35,6 @@ def get_text_chunks(text):
     return text_splitter.split_text(text)
 
 # Function to extract data from Excel/CSV/TSV files
-@st.cache_data
 def get_data_from_file(file):
     try:
         if file.name.endswith(('.csv', '.tsv')):
