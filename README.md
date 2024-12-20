@@ -17,7 +17,7 @@ The repository contains the following files and directories:
 ├── .env                 # Environment variables
 └── README.md            # Project documentation
 ├── LICENSE              # License
-└── libraries.txt        # List of all libraries and functions
+└── libraries.txt        # List of all libraries and their functions
 ```
 
 ## Getting Started
