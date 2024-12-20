@@ -32,7 +32,11 @@ def get_text_chunks(text):
         chunk_overlap=500, 
         separators=["\n\n", "\n", " ", ""]
     )
-    return text_splitter.split_text(text)
+    text_chunks = text_splitter.split_text(text)
+    if not text_chunks:
+        st.error("No text chunks were generated. Please ensure the document contains valid text.")
+        return
+    return text_chunks
 
 # Function to extract data from Excel/CSV/TSV files
 def get_data_from_file(file):
@@ -73,9 +77,15 @@ def generate_dataframe_insights(df):
 
 # Function to create FAISS vector store
 def create_vector_store(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
-    vector_store.save_local("faiss_index")
+    try:
+        embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+        text_chunks = [chunk.replace("\n", " ").strip() for chunk in text_chunks]
+        vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
+        vector_store.save_local("faiss_index")
+    except Exception as e:
+        st.error(f"Error creating FAISS index: {e}")
+        return
+    
 
 # Function to load FAISS index and query the data
 def get_answer_from_vectorstore(user_question):
