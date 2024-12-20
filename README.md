@@ -14,8 +14,10 @@ The repository contains the following files and directories:
 ```
 ├── app.py          # Main Streamlit application file
 ├── requirements.txt     # List of Python dependencies
-├── .env                 # Environment variables (if applicable)
+├── .env                 # Environment variables
 └── README.md            # Project documentation
+├── LICENSE              # License
+└── libraries.txt        # List of all libraries and functions
 ```
 
 ## Getting Started
