@@ -131,17 +131,22 @@ def get_general_insights(question):
 
 # Main Streamlit application
 def main():
+
+    MAX_FILE_SIZE_MB = 5  # Max file size in MB
+    MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024  # Convert to bytes
+
     st.set_page_config(page_title="Financial Insights AI", layout="wide")
     st.title("📊 Financial Insights AI Assistant")
 
     # Developer Link
-    st.markdown("**Developed by [Jeff-Tumuti](https://my-resume-nine-neon.vercel.app/)**")
+    st.markdown("**Developed by [Jeff-Tumuti](https://github.com/jeff-wamugi/FinInsight)**")
     st.markdown("Project Documentation: [Google Docs](https://docs.google.com/document/d/1Ex17OeJcUHN2gJmRUttvJ0nVqVzVFps0gfWx3wp7DPc/edit?usp=sharing)")
     st.write("Upload your financial documents (PDF, Excel, CSV), probe and gain valuable insights!")
 
     # Sidebar for file upload and instructions
     with st.sidebar:
         st.header("📂 Upload and Process Documents")
+        st.info("File Size Limit: 5MB per file")
         uploaded_files = st.file_uploader("Upload PDF/Excel/CSV/TSV files", accept_multiple_files=True, type=["pdf", "csv", "tsv", "xlsx"])
         process_files = st.button("⚙️ Process Documents")
 
@@ -160,6 +165,11 @@ def main():
         all_text = ""
         with st.spinner("Processing documents..."):
             for file in uploaded_files:
+                # Check file size
+                if file.size > MAX_FILE_SIZE_BYTES:
+                    st.error(f"The file {file.name} exceeds the size limit of {MAX_FILE_SIZE_MB} MB. Please upload a smaller file.")
+                    continue
+
                 if file.name.endswith(".pdf"):
                     text = get_pdf_text([file])
                     all_text += text + "\n"
@@ -174,7 +184,7 @@ def main():
                 create_vector_store(text_chunks)
                 st.success("✅ Documents successfully processed and vector store created!")
             else:
-                st.error("Failed to process uploaded documents. Please check the file formats.")
+                st.error("Failed to process uploaded documents. Please check the file formats and size.")
 
     # Question Answer Section
     st.write("---")
