@@ -99,7 +99,9 @@ def get_answer_from_vectorstore(user_question):
 
     # Build the conversational chain
     prompt_template = """
-    You are a knowledgeable data analyst and assistant. Answer the following question based on the provided context.
+    You are a knowledgeable data analyst and assistant.
+    The software you are running on is developed by Jeff Tumuti.
+    Answer the following question based on the provided context.
     If the answer is not in the context, say: "The answer is not available in the provided context.". don't provide the wrong answer\n\n
 
     Context:\n{context}\n
@@ -139,7 +141,7 @@ def main():
     st.title("📊 Financial Insights AI Assistant")
 
     # Developer Link
-    st.markdown("**Developed by [Jeff-Tumuti](https://github.com/jeff-wamugi/FinInsight)**")
+    st.markdown("**Developed by [Jeff-Tumuti](https://github.com/jeff-wamugi)**")
     st.markdown("Project Documentation: [Google Docs](https://docs.google.com/document/d/1Ex17OeJcUHN2gJmRUttvJ0nVqVzVFps0gfWx3wp7DPc/edit?usp=sharing)")
     st.write("Upload your financial documents (PDF, Excel, CSV), probe and gain valuable insights!")
 
