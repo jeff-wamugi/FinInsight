@@ -141,7 +141,7 @@ def main():
     st.title("📊 Financial Insights AI Assistant")
 
     # Developer Link
-    st.markdown("**Developed by [Jeff-Tumuti](https://github.com/jeff-wamugi)**")
+    st.markdown("**Developed by [Jeff-Tumuti](https://my-resume-nine-neon.vercel.app/)**")
     st.markdown("Project Documentation: [Google Docs](https://docs.google.com/document/d/1Ex17OeJcUHN2gJmRUttvJ0nVqVzVFps0gfWx3wp7DPc/edit?usp=sharing)")
     st.write("Upload your financial documents (PDF, Excel, CSV), probe and gain valuable insights!")
 
